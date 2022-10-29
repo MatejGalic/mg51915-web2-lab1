@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ isEdit ? "Edit comment" : "Add a comment" }}</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <textarea matInput [(ngModel)]="commentText"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="commentText" cdkFocusInitial>
+    Ok
+  </button>
+</div>

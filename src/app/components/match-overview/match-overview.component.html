@@ -10,8 +10,26 @@
     <div>
       <p *ngFor="let comment of match.comments">
         {{ comment.comment }}
+        {{ comment.author.fullName }}
         {{ comment.timestamp | date: "medium" }}
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="upsertComment(match, comment)"
+        >
+          Edit comment
+        </button>
+        <button mat-fab color="primary" (click)="deleteComment(match, comment)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </p>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="upsertComment(match, null)"
+      >
+        Add comment
+      </button>
     </div>
   </li>
 </ul>
