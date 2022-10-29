@@ -1,4 +1,7 @@
-<ul *ngIf="user$ | async as user">
-  <li>{{ user.name }}</li>
+<ul *ngIf="user">
+  <li>{{ user.fullName }}</li>
+  <!-- <li>{{ user.firstName }}</li>
+  <li>{{ user.lastName }}</li> -->
   <li>{{ user.email }}</li>
+  <li>{{ roleEnum[user.role] }}</li>
 </ul>

@@ -16,11 +16,7 @@ export class AuthButtonComponent implements OnInit {
 
   constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.authService.user$.subscribe((e) => {
-      console.log(e);
-    });
-  }
+  ngOnInit(): void {}
 
   public login() {
     this.authService.loginWithRedirect();
@@ -28,6 +24,6 @@ export class AuthButtonComponent implements OnInit {
   public logout() {
     console.log(environment.returnUrl);
 
-    this.authService.logout({returnTo: environment.returnUrl});
+    this.authService.logout({ returnTo: environment.returnUrl });
   }
 }

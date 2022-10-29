@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
+import { RoleEnum } from 'src/app/enums/role-enum';
+import { UserProfile } from 'src/app/models/user-profile';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,9 +9,12 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  public user$ = this.authService.user$;
+  public user: UserProfile;
+  public roleEnum = RoleEnum;
 
-  constructor(private authService: AuthService) {}
+  constructor(private userStore: UserStoreService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userStore.user$.subscribe((user) => (this.user = user));
+  }
 }

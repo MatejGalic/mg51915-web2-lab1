@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   auth0_client_domain: 'dev-0o15xqyhb5vt8cs0.us.auth0.com',
   auth0_client_id: 'SilV3mXGYZOCW2bqBtm5sVgLjK2vFL1A',
-  returnUrl: 'http://localhost:4200'
+  returnUrl: 'http://localhost:4200',
+  adminEmails: ['admin-mg51915@dispostable.com'],
 };
 
 /*
