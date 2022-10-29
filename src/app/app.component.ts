@@ -3,7 +3,9 @@ import { AuthService } from '@auth0/auth0-angular';
 import { filter, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RoleEnum } from './enums/role-enum';
+import { initialMatches } from './helpers/initial-match-data';
 import { UserProfile } from './models/user-profile';
+import { DbMockService } from './services/db-mock.service';
 import { UserStoreService } from './services/user-store.service';
 
 @Component({
@@ -14,7 +16,8 @@ import { UserStoreService } from './services/user-store.service';
 export class AppComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private userStore: UserStoreService
+    private userStore: UserStoreService,
+    private dbContext: DbMockService
   ) {}
 
   ngOnInit(): void {
@@ -34,5 +37,10 @@ export class AppComponent implements OnInit {
         };
         this.userStore.user = model;
       });
+
+    let savedState = JSON.parse(localStorage.getItem('dbState'));
+    let initMatches = savedState || initialMatches;
+
+    this.dbContext.matches = initMatches;
   }
 }

@@ -10,7 +10,7 @@
     <div>
       <p *ngFor="let comment of match.comments">
         {{ comment.comment }}
-        {{ comment.author.fullName }}
+        {{ comment.author?.fullName }}
         {{ comment.timestamp | date: "medium" }}
         <button
           mat-raised-button

@@ -7,24 +7,20 @@ import { Match } from '../models/match';
   providedIn: 'root',
 })
 export class DbMockService {
-  // private _matches: BehaviorSubject<Match[]> = new BehaviorSubject(null);
-  private _matches: BehaviorSubject<Match[]> = new BehaviorSubject(
-    initialMatches
-  );
+  private _matches: BehaviorSubject<Match[]> = new BehaviorSubject(null);
 
   public matches$: Observable<Match[]> = this._matches.asObservable();
 
-  // set matches(val: Match[]) {
-  //   this._matches.next(val);
-  // }
+  set matches(value: Match[]) {
+    this._matches.next(value);
+  }
 
   get matches(): Match[] {
     return this._matches.value;
   }
   constructor() {}
 
-  // public getMatches(): Match[] {
-  //   this.matches.sort((a, b) => b.leagueScore - a.leagueScore);
-  //   return this.matches;
-  // }
+  public commitData(): void {
+    localStorage.setItem('dbState', JSON.stringify(this.matches));
+  }
 }

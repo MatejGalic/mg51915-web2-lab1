@@ -54,6 +54,7 @@ export class MatchOverviewComponent implements OnInit {
             timestamp: new Date(),
           });
         }
+        this.dbService.commitData();
       });
   }
 
@@ -71,6 +72,7 @@ export class MatchOverviewComponent implements OnInit {
       )
       .subscribe(() => {
         match.comments = match.comments.filter((obj) => obj !== comment);
+        this.dbService.commitData();
       });
   }
 }
