@@ -10,9 +10,11 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { environment } from 'src/environments/environment';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { MatchOverviewComponent } from './components/match-overview/match-overview.component';
+import { OverallResultComponent } from './components/overall-result/overall-result.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, AuthButtonComponent, UserProfileComponent],
+  declarations: [AppComponent, HomepageComponent, AuthButtonComponent, UserProfileComponent, MatchOverviewComponent, OverallResultComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

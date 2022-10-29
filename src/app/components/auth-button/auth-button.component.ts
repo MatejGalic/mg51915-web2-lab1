@@ -22,8 +22,6 @@ export class AuthButtonComponent implements OnInit {
     this.authService.loginWithRedirect();
   }
   public logout() {
-    console.log(environment.returnUrl);
-
     this.authService.logout({ returnTo: environment.returnUrl });
   }
 }

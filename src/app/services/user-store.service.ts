@@ -17,7 +17,5 @@ export class UserStoreService {
     return this._user.value;
   }
 
-  constructor() {
-    console.log(this._user);
-  }
+  constructor() {}
 }

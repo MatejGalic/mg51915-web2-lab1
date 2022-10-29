@@ -1,0 +1,17 @@
+<ng-container *ngIf="matches"></ng-container>
+<ul>
+  <li *ngFor="let match of matches">
+    {{ match.firstTeam }}
+    vs
+    {{ match.secondTeam }}
+    {{ match.firstTeamScore }}
+    {{ match.secondTeamScore }}
+
+    <div>
+      <p *ngFor="let comment of match.comments">
+        {{ comment.comment }}
+        {{ comment.timestamp | date:'medium' }}
+      </p>
+    </div>
+  </li>
+</ul>

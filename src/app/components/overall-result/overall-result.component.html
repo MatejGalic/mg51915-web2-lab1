@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let match of results$ | async">
+    {{ match.teamName }}
+    <b>{{ match.leagueScore }}</b>
+  </li>
+</ul>
