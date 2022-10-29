@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth-button',
@@ -25,6 +26,8 @@ export class AuthButtonComponent implements OnInit {
     this.authService.loginWithRedirect();
   }
   public logout() {
-    this.authService.logout();
+    console.log(environment.returnUrl);
+
+    this.authService.logout({returnTo: environment.returnUrl});
   }
 }
