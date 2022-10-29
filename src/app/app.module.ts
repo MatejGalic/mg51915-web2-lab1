@@ -4,17 +4,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Import the module from the SDK
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
-import { HomepageComponent } from './pages/homepage/homepage.component';
-import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { environment } from 'src/environments/environment';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { MatchOverviewComponent } from './components/match-overview/match-overview.component';
 import { OverallResultComponent } from './components/overall-result/overall-result.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, AuthButtonComponent, UserProfileComponent, MatchOverviewComponent, OverallResultComponent],
+  declarations: [
+    AppComponent,
+    HomepageComponent,
+    AuthButtonComponent,
+    UserProfileComponent,
+    MatchOverviewComponent,
+    OverallResultComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,8 +31,11 @@ import { OverallResultComponent } from './components/overall-result/overall-resu
       domain: environment.auth0_client_domain,
       clientId: environment.auth0_client_id,
       useRefreshTokens: true,
-      cacheLocation: 'localstorage'
+      cacheLocation: 'localstorage',
     }),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

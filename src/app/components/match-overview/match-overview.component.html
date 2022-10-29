@@ -10,7 +10,7 @@
     <div>
       <p *ngFor="let comment of match.comments">
         {{ comment.comment }}
-        {{ comment.timestamp | date:'medium' }}
+        {{ comment.timestamp | date: "medium" }}
       </p>
     </div>
   </li>

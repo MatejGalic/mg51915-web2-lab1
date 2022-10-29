@@ -8,7 +8,7 @@ import { DbMockService } from 'src/app/services/db-mock.service';
   styleUrls: ['./match-overview.component.scss'],
 })
 export class MatchOverviewComponent implements OnInit {
-  matches: Match[]
+  matches: Match[];
 
   constructor(private dbService: DbMockService) {}
 

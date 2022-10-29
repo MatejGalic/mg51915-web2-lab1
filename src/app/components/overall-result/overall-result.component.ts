@@ -61,8 +61,6 @@ export class OverallResultComponent implements OnInit {
         }
       });
 
-      console.log(results);
-
       return results;
     })
   );

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { RoleEnum } from '../enums/role-enum';
-import { Match } from '../models/match';
-import { UserProfile } from '../models/user-profile';
-import { Comment } from '../models/comment';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { initialMatches } from '../helpers/initial-match-data';
+import { Match } from '../models/match';
 
 @Injectable({
   providedIn: 'root',
