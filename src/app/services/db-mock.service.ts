@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { initialMatches } from '../helpers/initial-match-data';
 import { Match } from '../models/match';
 
 @Injectable({
@@ -20,7 +19,12 @@ export class DbMockService {
   }
   constructor() {}
 
+  public addMatch(match: Match): void {
+    this._matches.value.push(match);
+  }
+
   public commitData(): void {
     localStorage.setItem('dbState', JSON.stringify(this.matches));
+    this._matches.next(this.matches);
   }
 }

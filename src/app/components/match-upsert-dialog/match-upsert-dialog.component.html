@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{ isEdit ? "Edit comment" : "Add a comment" }}</h1>
+<div [formGroup]="form" mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <input
+      required
+      min="0"
+      matInput
+      formControlName="firstTeamScore"
+      type="number"
+      placeholder="Goals"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <input
+      required
+      min="0"
+      matInput
+      formControlName="secondTeamScore"
+      type="number"
+      placeholder="Goals"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Team 1</mat-label>
+    <mat-select required formControlName="firstTeam">
+      <mat-option *ngFor="let team of teams" [value]="team">
+        {{ team }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Team 2</mat-label>
+    <mat-select required formControlName="secondTeam">
+      <mat-option *ngFor="let team of teams" [value]="team">
+        {{ team }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
+</div>

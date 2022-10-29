@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, take } from 'rxjs';
+import { filter, Subject, take, takeUntil } from 'rxjs';
 import { Comment } from 'src/app/models/comment';
 import { Match } from 'src/app/models/match';
 import { DbMockService } from 'src/app/services/db-mock.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { CommentDeleteDialogComponent } from '../comment-delete-dialog/comment-delete-dialog.component';
 import { CommentDialogComponent } from '../comment-dialog/comment-dialog.component';
+import { MatchUpsertDialogComponent } from '../match-upsert-dialog/match-upsert-dialog.component';
 
 @Component({
   selector: 'app-match-overview',
   templateUrl: './match-overview.component.html',
   styleUrls: ['./match-overview.component.scss'],
 })
-export class MatchOverviewComponent implements OnInit {
+export class MatchOverviewComponent implements OnInit, OnDestroy {
   matches: Match[];
+
+  private destroy$: Subject<void> = new Subject();
 
   constructor(
     private dbService: DbMockService,
@@ -22,17 +25,23 @@ export class MatchOverviewComponent implements OnInit {
     private userStore: UserStoreService
   ) {}
 
-  ngOnInit(): void {
-    this.dbService.matches$.subscribe((m) => (this.matches = m));
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
+  ngOnInit(): void {
+    this.dbService.matches$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((m) => (this.matches = m));
+  }
+
+  //#region Comments
   public upsertComment(match: Match, comment: Comment): void {
     const dialogRef = this.dialog.open(CommentDialogComponent, {
       width: '250px',
       data: comment?.comment,
     });
-
-    console.log(this.userStore.user);
 
     dialogRef
       .afterClosed()
@@ -72,6 +81,38 @@ export class MatchOverviewComponent implements OnInit {
       )
       .subscribe(() => {
         match.comments = match.comments.filter((obj) => obj !== comment);
+        this.dbService.commitData();
+      });
+  }
+
+  //#endregion
+
+  //#region MatchResult
+  public upsertMatch(match: Match): void {
+    const dialogRef = this.dialog.open(MatchUpsertDialogComponent, {
+      width: '250px',
+      data: match,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((res) => !!res),
+        take(1)
+      )
+      .subscribe((result: Match) => {
+        //update
+        if (!!match) {
+          match.firstTeam = result.firstTeam;
+          match.secondTeam = result.secondTeam;
+          match.firstTeamScore = result.firstTeamScore;
+          match.secondTeamScore = result.secondTeamScore;
+        }
+        //insert
+        else {
+          this.dbService.addMatch(result);
+        }
+
         this.dbService.commitData();
       });
   }
