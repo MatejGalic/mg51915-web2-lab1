@@ -26,6 +26,7 @@ import { MatchUpsertDialogComponent } from './components/match-upsert-dialog/mat
 import { OverallResultComponent } from './components/overall-result/overall-result.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { ScoreboardPageComponent } from './pages/scoreboard-page/scoreboard-page.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
     CommentDialogComponent,
     CommentDeleteDialogComponent,
     MatchUpsertDialogComponent,
+    ScoreboardPageComponent,
   ],
   imports: [
     BrowserModule,
