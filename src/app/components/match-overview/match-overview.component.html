@@ -25,6 +25,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
+    <!-- Comments -->
     <div *ngFor="let comment of match.comments" class="comment-row">
       <span class="comment-row-description">
         {{ comment.comment }}
@@ -52,7 +53,12 @@
         </button>
       </div>
     </div>
+    <div *ngIf="match?.comments?.length === 0" class="comment-row">
+      <i class="color-grey">No comments found...</i>
+    </div>
+
     <button
+      class="large-button"
       *ngIf="isRegular"
       mat-raised-button
       color="primary"
