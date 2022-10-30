@@ -27,22 +27,22 @@ const comments: Comment[] = [
   {
     comment: 'Katastrofa igra. Sramota od golmana.',
     author: users[0],
-    timestamp: new Date(),
+    timestamp: new Date(2022, 6, 15, 6, 30, 2),
   },
   {
     comment: 'Super gol u 41. minuti!',
     author: users[1],
-    timestamp: new Date(),
+    timestamp: new Date(2022, 6, 16, 13, 13, 26),
   },
   {
     comment: 'Nije Modrić kakav je nekada bio...',
     author: users[2],
-    timestamp: new Date(),
+    timestamp: new Date(2022, 7, 22, 16, 2, 2),
   },
   {
     comment: 'opet je sudac kriv za sve',
     author: users[2],
-    timestamp: new Date(),
+    timestamp: new Date(2022, 7, 13, 15, 56, 51),
   },
 ];
 
