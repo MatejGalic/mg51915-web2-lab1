@@ -12,3 +12,22 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.justify-content {
+  &-center {
+    justify-content: center;
+  }
+  &-space-between {
+    justify-content: space-between;
+  }
+}
