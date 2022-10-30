@@ -10,6 +10,8 @@ import { DbMockService } from 'src/app/services/db-mock.service';
   styleUrls: ['./overall-result.component.scss'],
 })
 export class OverallResultComponent implements OnInit {
+  displayedColumns: string[] = ['position', 'teamName', 'leagueScore'];
+
   public results$ = this.dbService.matches$.pipe(
     map((ms) => {
       let scoreboard: Record<string, MatchResult> = {};
