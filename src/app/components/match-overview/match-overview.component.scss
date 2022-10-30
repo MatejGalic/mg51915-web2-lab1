@@ -1,0 +1,45 @@
+$color-grey: rgba(255, 255, 255, 0.7);
+
+::ng-deep .color {
+  &-grey {
+    color: $color-grey;
+  }
+}
+
+.example-headers-align {
+  .mat-expansion-panel-header-title {
+    flex-basis: 30%;
+  }
+  .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+}
+
+.comment-row {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .action-buttons {
+    button {
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+      ::ng-deep .mat-button-wrapper {
+        padding: 0;
+      }
+    }
+  }
+  &-description {
+    max-width: 70%;
+  }
+}
+
+.large-button {
+  margin: 10px;
+}

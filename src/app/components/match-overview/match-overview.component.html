@@ -1,32 +1,45 @@
-<ng-container *ngIf="matches"></ng-container>
-<ul>
-  <li *ngFor="let match of matches">
-    {{ match.firstTeam }}
-    vs
-    {{ match.secondTeam }}
-    <b>
-      {{ match.firstTeamScore }}
-      -
-      {{ match.secondTeamScore }}
-    </b>
-
-    <div *ngIf="isAdmin">
-      <button mat-raised-button color="accent" (click)="upsertMatch(match)">
-        Edit match
-      </button>
-    </div>
-    <div>
-      <p *ngFor="let comment of match.comments">
-        {{ comment.comment }}
-        {{ comment.author?.fullName }}
-        {{ comment.timestamp | date: "medium" }}
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel *ngFor="let match of matches">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ match.firstTeam }}
+        -
+        {{ match.secondTeam }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <span>
+          <b>
+            {{ match.firstTeamScore }}
+            -
+            {{ match.secondTeamScore }}
+          </b>
+        </span>
         <button
-          *ngIf="isAdmin"
           mat-raised-button
+          color="accent"
+          (click)="upsertMatch(match)"
+        >
+          Edit
+        </button>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let comment of match.comments" class="comment-row">
+      <span class="comment-row-description">
+        {{ comment.comment }}
+        <span class="color-grey">
+          {{ comment.author?.fullName }}
+          {{ comment.timestamp | date: "medium" }}
+        </span>
+      </span>
+      <div class="action-buttons">
+        <button
+          *ngIf="isRegular && canEditComment(comment)"
+          mat-fab
           color="accent"
           (click)="upsertComment(match, comment)"
         >
-          Edit comment
+          <mat-icon> edit </mat-icon>
         </button>
         <button
           *ngIf="(isRegular && canEditComment(comment)) || isAdmin"
@@ -36,23 +49,24 @@
         >
           <mat-icon>delete</mat-icon>
         </button>
-      </p>
-      <button
-        *ngIf="isRegular"
-        mat-raised-button
-        color="primary"
-        (click)="upsertComment(match, null)"
-      >
-        Add comment
-      </button>
+      </div>
     </div>
-  </li>
-  <button
-    *ngIf="isAdmin"
-    mat-raised-button
-    color="primary"
-    (click)="upsertMatch(null)"
-  >
-    Add match
-  </button>
-</ul>
+    <button
+      *ngIf="isRegular"
+      mat-raised-button
+      color="primary"
+      (click)="upsertComment(match, null)"
+    >
+      Add a comment
+    </button>
+  </mat-expansion-panel>
+</mat-accordion>
+<button
+  class="large-button"
+  *ngIf="isAdmin"
+  mat-raised-button
+  color="primary"
+  (click)="upsertMatch(null)"
+>
+  Add match
+</button>

@@ -20,6 +20,8 @@ export class MatchOverviewComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
   isRegular: boolean = false;
 
+  panelOpenState = false;
+
   private destroy$: Subject<void> = new Subject();
 
   constructor(
