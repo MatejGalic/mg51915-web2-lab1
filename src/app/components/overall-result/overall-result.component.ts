@@ -12,33 +12,42 @@ import { DbMockService } from 'src/app/services/db-mock.service';
 export class OverallResultComponent implements OnInit {
   displayedColumns: string[] = ['position', 'teamName', 'leagueScore'];
 
-  public results$ = this.dbService.matches$.pipe(
-    map((ms) => {
+  public results$ = this.dbService.rounds$.pipe(
+    map((rs) => {
       let scoreboard: Record<string, MatchResult> = {};
       for (var team in TeamEnum) {
         scoreboard[team] = { leagueScore: 0, goalDifference: 0 };
       }
 
-      ms.forEach((m) => {
-        const team1 = Object.keys(TeamEnum).find(
-          (key) => TeamEnum[key] === m.firstTeam
-        );
-        const team2 = Object.keys(TeamEnum).find(
-          (key) => TeamEnum[key] === m.secondTeam
-        );
+      rs.forEach((r) => {
+        r.matches.forEach((m) => {
+          if (
+            m.firstTeam &&
+            m.secondTeam &&
+            m.firstTeamScore &&
+            m.secondTeamScore
+          ) {
+            const team1 = Object.keys(TeamEnum).find(
+              (key) => TeamEnum[key] === m.firstTeam
+            );
+            const team2 = Object.keys(TeamEnum).find(
+              (key) => TeamEnum[key] === m.secondTeam
+            );
 
-        const scoreDifference = m.firstTeamScore - m.secondTeamScore;
-        scoreboard[team1].goalDifference += scoreDifference;
-        scoreboard[team2].goalDifference += 0 - scoreDifference;
+            const scoreDifference = m.firstTeamScore - m.secondTeamScore;
+            scoreboard[team1].goalDifference += scoreDifference;
+            scoreboard[team2].goalDifference += 0 - scoreDifference;
 
-        if (m.firstTeamScore == m.secondTeamScore) {
-          scoreboard[team1].leagueScore += 1;
-          scoreboard[team2].leagueScore += 1;
-        } else if (m.firstTeamScore > m.secondTeamScore) {
-          scoreboard[team1].leagueScore += 3;
-        } else {
-          scoreboard[team2].leagueScore += 3;
-        }
+            if (m.firstTeamScore == m.secondTeamScore) {
+              scoreboard[team1].leagueScore += 1;
+              scoreboard[team2].leagueScore += 1;
+            } else if (m.firstTeamScore > m.secondTeamScore) {
+              scoreboard[team1].leagueScore += 3;
+            } else {
+              scoreboard[team2].leagueScore += 3;
+            }
+          }
+        });
       });
 
       let results: {

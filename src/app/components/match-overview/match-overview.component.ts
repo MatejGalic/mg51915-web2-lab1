@@ -4,6 +4,7 @@ import { filter, Subject, take, takeUntil } from 'rxjs';
 import { RoleEnum } from 'src/app/enums/role-enum';
 import { Comment } from 'src/app/models/comment';
 import { Match } from 'src/app/models/match';
+import { Round } from 'src/app/models/round';
 import { DbMockService } from 'src/app/services/db-mock.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { CommentDeleteDialogComponent } from '../comment-delete-dialog/comment-delete-dialog.component';
@@ -16,7 +17,7 @@ import { MatchUpsertDialogComponent } from '../match-upsert-dialog/match-upsert-
   styleUrls: ['./match-overview.component.scss'],
 })
 export class MatchOverviewComponent implements OnInit, OnDestroy {
-  matches: Match[];
+  rounds: Round[];
   isAdmin: boolean = false;
   isRegular: boolean = false;
 
@@ -36,9 +37,9 @@ export class MatchOverviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.dbService.matches$
+    this.dbService.rounds$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((m) => (this.matches = m));
+      .subscribe((m) => (this.rounds = m));
 
     this.userStore.user$.subscribe((user) => {
       this.isAdmin = user?.role === RoleEnum.Admin;
@@ -101,7 +102,7 @@ export class MatchOverviewComponent implements OnInit, OnDestroy {
   //#endregion
 
   //#region MatchResult
-  public upsertMatch(match: Match): void {
+  public upsertMatch(round: Round, match: Match): void {
     const dialogRef = this.dialog.open(MatchUpsertDialogComponent, {
       width: '250px',
       data: match,
@@ -123,7 +124,8 @@ export class MatchOverviewComponent implements OnInit, OnDestroy {
         }
         //insert
         else {
-          this.dbService.addMatch(result);
+          round.matches.push(result);
+          // this.dbService.addRound(result);
         }
 
         this.dbService.commitData();

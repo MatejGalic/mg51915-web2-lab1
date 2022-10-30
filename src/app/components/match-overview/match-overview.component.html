@@ -1,80 +1,97 @@
-<mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel *ngFor="let match of matches">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ match.firstTeam }}
-        -
-        {{ match.secondTeam }}
-      </mat-panel-title>
-      <mat-panel-description>
-        <span>
-          <b>
-            {{ match.firstTeamScore }}
+<div style="padding-top: 20px" *ngFor="let round of rounds">
+  <h1>Round {{ round.round }}</h1>
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel *ngFor="let match of round.matches">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span *ngIf="match?.firstTeam && match?.secondTeam; else noTeam">
+            {{ match.firstTeam }}
             -
-            {{ match.secondTeamScore }}
-          </b>
-        </span>
-        <button
-          *ngIf="isAdmin"
-          mat-raised-button
-          color="accent"
-          (click)="upsertMatch(match)"
-        >
-          Edit
-        </button>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+            {{ match.secondTeam }}
+          </span>
+          <ng-template #noTeam>
+            <i class="color-grey">Unkown yet</i>
+          </ng-template>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span
+            *ngIf="
+              match?.firstTeamScore != null && match?.secondTeamScore != null;
+              else notPlayed
+            "
+          >
+            <b>
+              {{ match.firstTeamScore }}
+              -
+              {{ match.secondTeamScore }}
+            </b>
+          </span>
+          <ng-template #notPlayed>
+            <i class="color-grey">Not played yet</i>
+          </ng-template>
+          <button
+            *ngIf="isAdmin"
+            mat-raised-button
+            color="accent"
+            (click)="upsertMatch(round, match); $event.stopPropagation()"
+          >
+            Edit
+          </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <!-- Comments -->
-    <div *ngFor="let comment of match.comments" class="comment-row">
-      <span class="comment-row-description">
-        {{ comment.comment }}
-        <span class="color-grey">
-          -
-          {{ comment.author?.fullName }}
-          {{ comment.timestamp | date: "medium" }}
+      <!-- Comments -->
+      <div *ngFor="let comment of match.comments" class="comment-row">
+        <span class="comment-row-description">
+          {{ comment.comment }}
+          <span class="color-grey">
+            -
+            {{ comment.author?.fullName }}
+            {{ comment.timestamp | date: "medium" }}
+          </span>
         </span>
-      </span>
-      <div class="action-buttons">
-        <button
-          *ngIf="isRegular && canEditComment(comment)"
-          mat-fab
-          color="accent"
-          (click)="upsertComment(match, comment)"
-        >
-          <mat-icon> edit </mat-icon>
-        </button>
-        <button
-          *ngIf="(isRegular && canEditComment(comment)) || isAdmin"
-          mat-fab
-          color="warn"
-          (click)="deleteComment(match, comment)"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+        <div class="action-buttons">
+          <button
+            *ngIf="isRegular && canEditComment(comment)"
+            mat-fab
+            color="accent"
+            (click)="upsertComment(match, comment)"
+          >
+            <mat-icon> edit </mat-icon>
+          </button>
+          <button
+            *ngIf="(isRegular && canEditComment(comment)) || isAdmin"
+            mat-fab
+            color="warn"
+            (click)="deleteComment(match, comment)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
-    </div>
-    <div *ngIf="match?.comments?.length === 0" class="comment-row">
-      <i class="color-grey">No comments found...</i>
-    </div>
+      <div *ngIf="match?.comments?.length === 0" class="comment-row">
+        <i class="color-grey">No comments found...</i>
+      </div>
 
-    <button
-      class="large-button"
-      *ngIf="isRegular"
-      mat-raised-button
-      color="primary"
-      (click)="upsertComment(match, null)"
-    >
-      Add a comment
-    </button>
-  </mat-expansion-panel>
-</mat-accordion>
-<button
+      <button
+        class="large-button"
+        *ngIf="isRegular"
+        mat-raised-button
+        color="primary"
+        (click)="upsertComment(match, null)"
+      >
+        Add a comment
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<!-- <button
   class="large-button"
   *ngIf="isAdmin"
   mat-raised-button
   color="primary"
-  (click)="upsertMatch(null)"
+  (click)="upsertMatch(null, null)"
 >
   Add match
-</button>
+</button> -->

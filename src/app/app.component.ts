@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { filter, take } from 'rxjs';
+import { filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RoleEnum } from './enums/role-enum';
-import { initialMatches, initialRounds } from './helpers/initial-match-data';
+import { initialRounds } from './helpers/initial-match-data';
 import { UserProfile } from './models/user-profile';
 import { DbMockService } from './services/db-mock.service';
 import { UserStoreService } from './services/user-store.service';
@@ -40,8 +40,8 @@ export class AppComponent implements OnInit {
     });
 
     let savedState = JSON.parse(localStorage.getItem('dbState'));
-    let initMatches = savedState || initialMatches;
+    let initRounds = savedState || initialRounds;
 
-    this.dbContext.matches = initMatches;
+    this.dbContext.rounds = initRounds;
   }
 }

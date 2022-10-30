@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>{{ isEdit ? "Edit comment" : "Add a comment" }}</h1>
 <div [formGroup]="form" mat-dialog-content>
   <mat-form-field appearance="fill">
+    <mat-label>Team 1 score</mat-label>
     <input
       required
       min="0"
@@ -11,6 +12,7 @@
     />
   </mat-form-field>
   <mat-form-field appearance="fill">
+    <mat-label>Team 2 score</mat-label>
     <input
       required
       min="0"
