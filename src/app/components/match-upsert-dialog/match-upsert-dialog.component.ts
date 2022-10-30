@@ -10,8 +10,6 @@ import { Match } from 'src/app/models/match';
   styleUrls: ['./match-upsert-dialog.component.scss'],
 })
 export class MatchUpsertDialogComponent implements OnInit {
-  // match: Match = this.data;
-  match: Match = Object.assign({}, this.data);
   teams: string[] = [];
   isEdit: boolean = !!this.data;
 

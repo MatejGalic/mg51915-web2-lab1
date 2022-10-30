@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, Subject, take, takeUntil } from 'rxjs';
+import { RoleEnum } from 'src/app/enums/role-enum';
 import { Comment } from 'src/app/models/comment';
 import { Match } from 'src/app/models/match';
 import { DbMockService } from 'src/app/services/db-mock.service';
@@ -16,6 +17,8 @@ import { MatchUpsertDialogComponent } from '../match-upsert-dialog/match-upsert-
 })
 export class MatchOverviewComponent implements OnInit, OnDestroy {
   matches: Match[];
+  isAdmin: boolean = false;
+  isRegular: boolean = false;
 
   private destroy$: Subject<void> = new Subject();
 
@@ -34,6 +37,11 @@ export class MatchOverviewComponent implements OnInit, OnDestroy {
     this.dbService.matches$
       .pipe(takeUntil(this.destroy$))
       .subscribe((m) => (this.matches = m));
+
+    this.userStore.user$.subscribe((user) => {
+      this.isAdmin = user?.role === RoleEnum.Admin;
+      this.isRegular = user?.role === RoleEnum.Regular;
+    });
   }
 
   //#region Comments
@@ -85,6 +93,9 @@ export class MatchOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
+  public canEditComment(comment: Comment) {
+    return comment.author.email === this.userStore.user.email;
+  }
   //#endregion
 
   //#region MatchResult

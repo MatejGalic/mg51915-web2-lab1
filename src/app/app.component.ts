@@ -22,21 +22,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const admins = environment.adminEmails;
-    this.authService.user$
-      .pipe(
-        filter((u) => !!u),
-        take(1)
-      )
-      .subscribe((user) => {
-        const model: UserProfile = {
-          fullName: user.name,
-          firstName: user.given_name,
-          lastName: user.family_name,
-          email: user.email,
-          role: admins.includes(user.email) ? RoleEnum.Admin : RoleEnum.Regular,
-        };
-        this.userStore.user = model;
-      });
+
+    this.authService.user$.pipe(filter((u) => !!u)).subscribe((user) => {
+      const model: UserProfile = {
+        fullName: user.name,
+        firstName: user.given_name,
+        lastName: user.family_name,
+        email: user.email,
+        role: admins.includes(user.email) ? RoleEnum.Admin : RoleEnum.Regular,
+      };
+      this.userStore.user = model;
+    });
 
     let savedState = JSON.parse(localStorage.getItem('dbState'));
     let initMatches = savedState || initialMatches;
