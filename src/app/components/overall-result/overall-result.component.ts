@@ -14,6 +14,8 @@ export class OverallResultComponent implements OnInit {
 
   public results$ = this.dbService.rounds$.pipe(
     map((rs) => {
+      console.log('pipe');
+
       let scoreboard: Record<string, MatchResult> = {};
       for (var team in TeamEnum) {
         scoreboard[team] = { leagueScore: 0, goalDifference: 0 };
@@ -66,7 +68,7 @@ export class OverallResultComponent implements OnInit {
 
       results.sort((a, b) => {
         if (a.leagueScore != b.leagueScore) {
-          return b.goalDifference - a.leagueScore;
+          return b.leagueScore - a.leagueScore;
         } else {
           return b.goalDifference - a.goalDifference;
         }
