@@ -30,10 +30,10 @@ export class MatchUpsertDialogComponent implements OnInit {
 
   private initForm() {
     this.form = this.fb.group({
-      firstTeam: [this.data?.firstTeam, [Validators.required]],
-      secondTeam: [this.data?.secondTeam, [Validators.required]],
-      secondTeamScore: [this.data?.secondTeamScore || 0, [Validators.required]],
-      firstTeamScore: [this.data?.firstTeamScore || 0, [Validators.required]],
+      firstTeam: [this.data?.firstTeam],
+      secondTeam: [this.data?.secondTeam],
+      secondTeamScore: [this.data?.secondTeamScore],
+      firstTeamScore: [this.data?.firstTeamScore],
       comments: [this.data?.comments || []],
     });
   }

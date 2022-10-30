@@ -4,14 +4,18 @@
     <mat-expansion-panel *ngFor="let match of round.matches">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <span *ngIf="match?.firstTeam && match?.secondTeam; else noTeam">
-            {{ match.firstTeam }}
+          <span>
+            <ng-container *ngIf="match?.firstTeam; else noTeam">
+              {{ match.firstTeam || "Unknown" }}
+            </ng-container>
             -
-            {{ match.secondTeam }}
+            <ng-container *ngIf="match?.secondTeam; else noTeam">
+              {{ match.secondTeam || "Unknown" }}
+            </ng-container>
+            <ng-template #noTeam>
+              <i class="color-grey">Unkown</i>
+            </ng-template>
           </span>
-          <ng-template #noTeam>
-            <i class="color-grey">Unkown yet</i>
-          </ng-template>
         </mat-panel-title>
         <mat-panel-description>
           <span

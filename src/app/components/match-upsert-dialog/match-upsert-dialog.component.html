@@ -3,7 +3,6 @@
   <mat-form-field appearance="fill">
     <mat-label>Team 1 score</mat-label>
     <input
-      required
       min="0"
       matInput
       formControlName="firstTeamScore"
@@ -14,7 +13,6 @@
   <mat-form-field appearance="fill">
     <mat-label>Team 2 score</mat-label>
     <input
-      required
       min="0"
       matInput
       formControlName="secondTeamScore"
@@ -24,7 +22,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Team 1</mat-label>
-    <mat-select required formControlName="firstTeam">
+    <mat-select formControlName="firstTeam">
       <mat-option *ngFor="let team of teams" [value]="team">
         {{ team }}
       </mat-option>
@@ -32,7 +30,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Team 2</mat-label>
-    <mat-select required formControlName="secondTeam">
+    <mat-select formControlName="secondTeam">
       <mat-option *ngFor="let team of teams" [value]="team">
         {{ team }}
       </mat-option>
