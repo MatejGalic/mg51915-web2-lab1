@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
@@ -27,6 +28,7 @@ import { OverallResultComponent } from './components/overall-result/overall-resu
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ScoreboardPageComponent } from './pages/scoreboard-page/scoreboard-page.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ScoreboardPageComponent } from './pages/scoreboard-page/scoreboard-page
     CommentDeleteDialogComponent,
     MatchUpsertDialogComponent,
     ScoreboardPageComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { ScoreboardPageComponent } from './pages/scoreboard-page/scoreboard-page
     MatExpansionModule,
     MatMenuModule,
     MatTableModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

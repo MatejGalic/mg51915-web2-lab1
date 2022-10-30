@@ -6,6 +6,11 @@ import { ScoreboardPageComponent } from './pages/scoreboard-page/scoreboard-page
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'matches',
+  },
+  {
+    path: 'matches',
     component: HomepageComponent,
   },
   {
