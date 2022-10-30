@@ -1,7 +1,5 @@
-<ul *ngIf="user">
-  <li>{{ user.fullName }}</li>
-  <!-- <li>{{ user.firstName }}</li>
-  <li>{{ user.lastName }}</li> -->
-  <li>{{ user.email }}</li>
-  <li>{{ roleEnum[user.role] }}</li>
-</ul>
+<div class="user-container" *ngIf="user">
+  <h1>{{ user.fullName }}</h1>
+  <p>E-mail: {{ user.email }}</p>
+  <p>Role: {{ roleEnum[user.role] }}</p>
+</div>

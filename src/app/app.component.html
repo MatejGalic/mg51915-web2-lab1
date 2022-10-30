@@ -1,5 +1,14 @@
 <mat-toolbar color="primary">
   <span>Fantasy Football League</span>
-  <app-auth-button></app-auth-button>
+  <div>
+    <app-auth-button></app-auth-button>
+
+    <button *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="menu">
+      <img class="profilePic" [src]="profilePicture" />
+    </button>
+    <mat-menu #menu="matMenu">
+      <app-user-profile></app-user-profile>
+    </mat-menu>
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>

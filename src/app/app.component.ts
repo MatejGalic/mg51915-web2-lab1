@@ -14,6 +14,9 @@ import { UserStoreService } from './services/user-store.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  profilePicture: string;
+  isLoggedIn: boolean = false;
+
   constructor(
     private authService: AuthService,
     private userStore: UserStoreService,
@@ -24,6 +27,7 @@ export class AppComponent implements OnInit {
     const admins = environment.adminEmails;
 
     this.authService.user$.pipe(filter((u) => !!u)).subscribe((user) => {
+      this.profilePicture = user.picture;
       const model: UserProfile = {
         fullName: user.name,
         firstName: user.given_name,
@@ -32,6 +36,7 @@ export class AppComponent implements OnInit {
         role: admins.includes(user.email) ? RoleEnum.Admin : RoleEnum.Regular,
       };
       this.userStore.user = model;
+      this.isLoggedIn = true;
     });
 
     let savedState = JSON.parse(localStorage.getItem('dbState'));

@@ -7,6 +7,9 @@ $color-grey: rgba(255, 255, 255, 0.7);
 }
 
 .example-headers-align {
+  .mat-expansion-panel-header {
+    height: 60px;
+  }
   .mat-expansion-panel-header-title {
     flex-basis: 30%;
   }
