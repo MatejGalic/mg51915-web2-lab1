@@ -3,7 +3,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { filter, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RoleEnum } from './enums/role-enum';
-import { initialMatches } from './helpers/initial-match-data';
+import { initialMatches, initialRounds } from './helpers/initial-match-data';
 import { UserProfile } from './models/user-profile';
 import { DbMockService } from './services/db-mock.service';
 import { UserStoreService } from './services/user-store.service';

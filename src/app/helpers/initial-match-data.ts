@@ -2,6 +2,7 @@ import { RoleEnum } from '../enums/role-enum';
 import { TeamEnum } from '../enums/team-enum';
 import { Comment } from '../models/comment';
 import { Match } from '../models/match';
+import { Round } from '../models/round';
 import { UserProfile } from '../models/user-profile';
 
 const users: UserProfile[] = [
@@ -38,6 +39,11 @@ const comments: Comment[] = [
     author: users[2],
     timestamp: new Date(),
   },
+  {
+    comment: 'opet je sudac kriv za sve',
+    author: users[2],
+    timestamp: new Date(),
+  },
 ];
 
 export const initialMatches: Match[] = [
@@ -61,5 +67,47 @@ export const initialMatches: Match[] = [
     firstTeamScore: 1,
     secondTeamScore: 2,
     comments: [],
+  },
+  {
+    firstTeam: TeamEnum.Liverpool,
+    secondTeam: TeamEnum.Juventus,
+    firstTeamScore: 5,
+    secondTeamScore: 2,
+    comments: [comments[3]],
+  },
+];
+
+const secondMatches: Match[] = [
+  {
+    firstTeam: TeamEnum.Dinamo,
+    secondTeam: TeamEnum.RealMadrid,
+    firstTeamScore: 1,
+    secondTeamScore: 1,
+    comments: [],
+  },
+  {
+    firstTeam: TeamEnum.VelikaGorica,
+    secondTeam: TeamEnum.Juventus,
+    firstTeamScore: 1,
+    secondTeamScore: 2,
+    comments: [],
+  },
+  {
+    firstTeam: TeamEnum.Liverpool,
+    secondTeam: TeamEnum.Lokomotiva,
+    firstTeamScore: 5,
+    secondTeamScore: 2,
+    comments: [comments[1]],
+  },
+];
+
+export const initialRounds: Round[] = [
+  {
+    round: 1,
+    matches: initialMatches,
+  },
+  {
+    round: 2,
+    matches: secondMatches,
   },
 ];

@@ -4,6 +4,7 @@ export enum TeamEnum {
   RealMadrid = 'Real Madrid',
   Barcelona = 'Barcelona',
   Lokomotiva = 'Lokomotiva',
-  VelikaGorica = 'Velika Gorica'
-
+  VelikaGorica = 'Velika Gorica',
+  Juventus = 'Juventus',
+  Liverpool = 'Liverpool',
 }
